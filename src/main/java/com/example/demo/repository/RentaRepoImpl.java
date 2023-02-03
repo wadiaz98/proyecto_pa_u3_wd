@@ -20,4 +20,22 @@ public class RentaRepoImpl implements IRentaRepo {
 		this.entityManager.persist(renta);
 	}
 
+	@Override
+	public void actualizar(Renta renta) {
+		// TODO Auto-generated method stub
+		this.entityManager.merge(renta);
+	}
+
+	@Override
+	public Renta buscar(Integer id) {
+		// TODO Auto-generated method stub
+		return this.entityManager.find(Renta.class, id);
+	}
+
+	@Override
+	public void borrar(Integer id) {
+		// TODO Auto-generated method stub
+		this.entityManager.remove(this.buscar(id));
+	}
+
 }
