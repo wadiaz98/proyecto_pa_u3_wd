@@ -50,21 +50,21 @@ public class ProyectoPaU3WdApplication implements CommandLineRunner {
 		estudiante4.setGenero("F");
 
 		/*
-		 this.estudianteService.insertar(estudiante1);
-		 this.estudianteService.insertar(estudiante2);
-		 this.estudianteService.insertar(estudiante3);
-		 this.estudianteService.insertar(estudiante4);
-		*/
-		System.out.println("Busqueda por Apellido: ");
-		System.out.println(this.estudianteService.buscarPorApellido("Torres"));
-		System.out.println("Busqueda por Genero: ");
-		System.out.println(this.estudianteService.buscarPorGenero("F"));
-		System.out.println("Busqueda por Cedula: ");
-		System.out.println(this.estudianteService.buscarPorCedula("1725841539"));
-		System.out.println("Busqueda por Ciudad: ");
-		System.out.println(this.estudianteService.buscarPorCiudad("Quito"));
-		
-
+		 * this.estudianteService.insertar(estudiante1);
+		 * this.estudianteService.insertar(estudiante2);
+		 * this.estudianteService.insertar(estudiante3);
+		 * this.estudianteService.insertar(estudiante4);
+		 */
+		System.out.println("Busqueda por Nombre con Typed Query: ");
+		System.out.println(this.estudianteService.buscarPorNombreTypeQuery("Willan"));
+		System.out.println("Busqueda por Apellido con Named Query: ");
+		System.out.println(this.estudianteService.buscarPorApellidoNamedQuery("Torres"));
+		System.out.println("Busqueda por Apellido con Named Query Typed: ");
+		System.out.println(this.estudianteService.buscarPorApellidoNamedQueryTyped("Guaman"));
+		System.out.println("Busqueda por Nombre con Native Query: ");
+		System.out.println(this.estudianteService.buscarPorNombreNativeQuery("Alexander"));
+		// System.out.println("Busqueda por Nombre con Native Query Named Typed: ");
+		// System.out.println(this.estudianteService.buscarPorNombreNativeQueryTypedNamed("Marco"));
 	}
 
 }

@@ -48,4 +48,34 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		this.estudianteRepo.insertar(estudiante);
 	}
 
+	@Override
+	public Estudiante buscarPorNombreTypeQuery(String nombre) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorNombreTypeQuery(nombre);
+	}
+
+	@Override
+	public Estudiante buscarPorApellidoNamedQuery(String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorApellidoNamedQuery(apellido);
+	}
+
+	@Override
+	public Estudiante buscarPorApellidoNamedQueryTyped(String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorApellidoNamedQueryTyped(apellido);
+	}
+
+	@Override
+	public Estudiante buscarPorNombreNativeQuery(String nombre) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorNombreNativeQuery(nombre);
+	}
+
+	@Override
+	public Estudiante buscarPorNombreNativeQueryTypedNamed(String nombre) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.buscarPorNombreNativeQueryTypedNamed(nombre);
+	}
+
 }

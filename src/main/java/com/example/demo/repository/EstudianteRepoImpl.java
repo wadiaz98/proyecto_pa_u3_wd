@@ -7,6 +7,7 @@ import com.example.demo.modelo.Estudiante;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -64,6 +65,50 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 	public void insertar(Estudiante estudiante) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(estudiante);
+	}
+
+	@Override
+	public Estudiante buscarPorNombreTypeQuery(String nombre) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myTypedQuery = this.entityManager
+				.createQuery("select e from Estudiante e where e.nombre = :datoNombre", Estudiante.class);
+		myTypedQuery.setParameter("datoNombre", nombre);
+		return myTypedQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarPorApellidoNamedQuery(String apellido) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorApe");
+		myQuery.setParameter("datoApellido", apellido);
+		return (Estudiante) myQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarPorApellidoNamedQueryTyped(String apellido) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> typedQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorApe",
+				Estudiante.class);
+		typedQuery.setParameter("datoApellido", apellido);
+		return typedQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarPorNombreNativeQuery(String nombre) {
+		// TODO Auto-generated method stub
+		Query myQuery = this.entityManager.createNativeQuery("select * from estudiante where estu_nombre = :datoNombre",
+				Estudiante.class);
+		myQuery.setParameter("datoNombre", nombre);
+		return (Estudiante) myQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarPorNombreNativeQueryTypedNamed(String nombre) {
+		// TODO Auto-generated method stub
+		TypedQuery<Estudiante> myQuery = this.entityManager.createNamedQuery("Estudiante.buscarPorNombreNative",
+				Estudiante.class);
+		myQuery.setParameter("datoNombre", nombre);
+		return myQuery.getSingleResult();
 	}
 
 }
