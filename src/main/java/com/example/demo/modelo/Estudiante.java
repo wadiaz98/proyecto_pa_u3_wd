@@ -5,14 +5,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedNativeQueries;
 import jakarta.persistence.NamedNativeQuery;
+import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
-@NamedQuery(name = "Estudiante.buscarPorApe", query = "select e from Estudiante e where e.apellido = :datoApellido")
-@NamedNativeQuery(name = "Estudiante.buscarPorNombreNative", query = "select * from estudiante where estu_nombre = :datoNombre")
+
+@NamedQueries({
+		@NamedQuery(name = "Estudiante.buscarPorApe", query = "select e from Estudiante e where e.apellido = :datoApellido"),
+		@NamedQuery(name = "Estudiante.buscarPorApe1", query = "select e from Estudiante e where e.apellido = :datoApellido"),
+		@NamedQuery(name = "Estudiante.buscarPorApe2", query = "select e from Estudiante e where e.apellido = :datoApellido") })
+
+@NamedNativeQueries({
+		@NamedNativeQuery(name = "Estudiante.buscarPorNombreNative", query = "select * from estudiante where estu_nombre = :datoNombre", resultClass = Estudiante.class),
+		@NamedNativeQuery(name = "Estudiante.buscarPorNombreNative1", query = "select * from estudiante where estu_nombre = :datoNombre", resultClass = Estudiante.class),
+		@NamedNativeQuery(name = "Estudiante.buscarPorNombreNative2", query = "select * from estudiante where estu_nombre = :datoNombre", resultClass = Estudiante.class) })
 @Table(name = "estudiante")
 public class Estudiante {
 

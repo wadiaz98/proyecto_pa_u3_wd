@@ -55,6 +55,7 @@ public class ProyectoPaU3WdApplication implements CommandLineRunner {
 		 * this.estudianteService.insertar(estudiante3);
 		 * this.estudianteService.insertar(estudiante4);
 		 */
+
 		System.out.println("Busqueda por Nombre con Typed Query: ");
 		System.out.println(this.estudianteService.buscarPorNombreTypeQuery("Willan"));
 		System.out.println("Busqueda por Apellido con Named Query: ");
@@ -63,8 +64,13 @@ public class ProyectoPaU3WdApplication implements CommandLineRunner {
 		System.out.println(this.estudianteService.buscarPorApellidoNamedQueryTyped("Guaman"));
 		System.out.println("Busqueda por Nombre con Native Query: ");
 		System.out.println(this.estudianteService.buscarPorNombreNativeQuery("Alexander"));
-		// System.out.println("Busqueda por Nombre con Native Query Named Typed: ");
-		// System.out.println(this.estudianteService.buscarPorNombreNativeQueryTypedNamed("Marco"));
+		System.out.println("Busqueda por Nombre con Native Query Named Typed: ");
+		System.out.println(this.estudianteService.buscarPorNombreNativeQueryTypedNamed("Marco"));
+
+		System.out.println("Lista de estudiantes obtenidos por query: ");
+		this.estudianteService.buscarPorNombreQueryList("M").forEach(System.out::println);
+		System.out.println("Lista de estudiantes obtenidos por query con el primer metodo: ");
+		System.out.println(this.estudianteService.buscarPorNombreFirst("M"));
 	}
 
 }
