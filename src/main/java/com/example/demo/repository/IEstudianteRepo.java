@@ -44,4 +44,9 @@ public interface IEstudianteRepo {
 
 	// DTO
 	public EstudianteDTO buscarPorNombreTypeQueryDTO(String nombre);
+
+	// Criteria Api Query
+	public Estudiante buscarPorNombreCriteria(String nombre);
+
+	public List<Estudiante> buscarPorNombreCriteriaAndOr(String nombre, String apellido, String bandera);
 }

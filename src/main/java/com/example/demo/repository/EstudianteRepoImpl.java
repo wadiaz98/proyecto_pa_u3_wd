@@ -11,6 +11,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -147,10 +151,12 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 	@Override
 	public Estudiante buscarPorNombreFirst(String genero) {
 		// TODO Auto-generated method stub
+
 		// select * from estudiante where estu_nombre = 'Willan'
 		// select e from Estudiante e where e.nombre = : datoNombre
 		Query jpqlQuery = this.entityManager.createQuery("select e from Estudiante e where e.genero = :datoGenero");
 		jpqlQuery.setParameter("datoGenero", genero);
+
 		// retorna un tipo de dato generico y toca castear
 		return (Estudiante) jpqlQuery.getResultList().get(0);
 	}
@@ -159,10 +165,78 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 	public EstudianteDTO buscarPorNombreTypeQueryDTO(String nombre) {
 		// TODO Auto-generated method stub
 		TypedQuery<EstudianteDTO> myTypedQuery = this.entityManager.createQuery(
-				"select NEW EstudianteDTO(e.nombre, e.apellido) from Estudiante e where e.nombre = :datoNombre",
+				"select NEW com.example.demo.modelo.dto.EstudianteDTO(e.cedula, e.nombre, e.apellido, e.genero) from Estudiante e where e.nombre = :datoNombre",
 				EstudianteDTO.class);
 		myTypedQuery.setParameter("datoNombre", nombre);
 		return myTypedQuery.getSingleResult();
+	}
+
+	@Override
+	public Estudiante buscarPorNombreCriteria(String nombre) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+
+		// Especificamos el tipo de retorno de mi query
+		CriteriaQuery<Estudiante> myCriteriaQuery = myBuilder.createQuery(Estudiante.class);
+
+		// Aqui empezamos a crear el SQL
+		// Se define el FROM-Root
+		Root<Estudiante> miTablaFrom = myCriteriaQuery.from(Estudiante.class); // FROM Estudiante
+
+		// Las condiciones WHERE se conocen en Criteria API Query como predicados
+		// e.nombre = :datoNombre
+		Predicate condicion1 = myBuilder.equal(miTablaFrom.get("nombre"), nombre);
+
+		// Finalizado y declarado/armado mi query
+		myCriteriaQuery.select(miTablaFrom).where(condicion1);
+
+		// La ejecucion del query lo realizamos con cualquier tipo ya conocido:
+		// TypedQuery
+
+		TypedQuery<Estudiante> mySQL = this.entityManager.createQuery(myCriteriaQuery);
+
+		return mySQL.getSingleResult();
+	}
+
+	@Override
+	public List<Estudiante> buscarPorNombreCriteriaAndOr(String nombre, String apellido, String genero) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = this.entityManager.getCriteriaBuilder();
+
+		// Especificamos el tipo de retorno de mi query
+		CriteriaQuery<Estudiante> myCriteriaQuery = myBuilder.createQuery(Estudiante.class);
+
+		// Aqui empezamos a crear el SQL
+		// Se define el FROM-Root
+		Root<Estudiante> miTablaFrom = myCriteriaQuery.from(Estudiante.class); // FROM Estudiante
+
+		// Las condiciones WHERE se conocen en Criteria API Query como predicados
+		// Masculino: e.nombre = AND e.apellido =
+		// Femenino: e.nombre = OR e.apellido
+		// Creamos los predicados
+		// Predicado nombre
+		Predicate p1 = myBuilder.equal(miTablaFrom.get("nombre"), nombre);
+
+		// Predicado apellido
+		Predicate p2 = myBuilder.equal(miTablaFrom.get("apellido"), apellido);
+
+		Predicate predicadoFinal = null;
+		if (genero.equals("M")) {
+			// Predicado AND
+			predicadoFinal = myBuilder.and(p1, p2);
+		} else {
+			// Predicado OR
+			predicadoFinal = myBuilder.or(p1, p2);
+		}
+
+		// Finalizado y declarado/armado mi query
+		myCriteriaQuery.select(miTablaFrom).where(predicadoFinal);
+
+		// La ejecucion del query lo realizamos con cualquier tipo ya conocido:
+		// TypedQuery
+		TypedQuery<Estudiante> mySQL = this.entityManager.createQuery(myCriteriaQuery);
+		
+		return mySQL.getResultList();
 	}
 
 }

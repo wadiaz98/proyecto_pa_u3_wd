@@ -2,36 +2,39 @@ package com.example.demo.modelo.dto;
 
 public class EstudianteDTO {
 
-	private Integer id;
+	private String cedula;
 
 	private String nombre;
 
 	private String apellido;
+
+	private String genero;
 
 	// Constructores
 	public EstudianteDTO() {
 
 	}
 
-	public EstudianteDTO(Integer id, String nombre, String apellido) {
+	public EstudianteDTO(String cedula, String nombre, String apellido, String genero) {
 		super();
-		this.id = id;
+		this.cedula = cedula;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.genero = genero;
 	}
 
 	// Set y get
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public String getNombre() {
 		return nombre;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
 	public void setNombre(String nombre) {
@@ -46,10 +49,18 @@ public class EstudianteDTO {
 		this.apellido = apellido;
 	}
 
-	// To String
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
 	@Override
 	public String toString() {
-		return "EstudianteDTO [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + "]";
+		return "EstudianteDTO [cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", genero="
+				+ genero + "]";
 	}
 
 }

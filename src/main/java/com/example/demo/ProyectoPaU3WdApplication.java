@@ -56,21 +56,16 @@ public class ProyectoPaU3WdApplication implements CommandLineRunner {
 		 * this.estudianteService.insertar(estudiante4);
 		 */
 
-		System.out.println("Busqueda por Nombre con Typed Query: ");
-		System.out.println(this.estudianteService.buscarPorNombreTypeQuery("Willan"));
-		System.out.println("Busqueda por Apellido con Named Query: ");
-		System.out.println(this.estudianteService.buscarPorApellidoNamedQuery("Torres"));
-		System.out.println("Busqueda por Apellido con Named Query Typed: ");
-		System.out.println(this.estudianteService.buscarPorApellidoNamedQueryTyped("Guaman"));
-		System.out.println("Busqueda por Nombre con Native Query: ");
-		System.out.println(this.estudianteService.buscarPorNombreNativeQuery("Alexander"));
-		System.out.println("Busqueda por Nombre con Native Query Named Typed: ");
-		System.out.println(this.estudianteService.buscarPorNombreNativeQueryTypedNamed("Marco"));
+		System.out.println("Busqueda de un EstudianteDTO: ");
+		System.out.println(this.estudianteService.buscarPorNombreTypeQueryDTO("Willan"));
 
-		System.out.println("Lista de estudiantes obtenidos por query: ");
-		this.estudianteService.buscarPorNombreQueryList("M").forEach(System.out::println);
-		System.out.println("Lista de estudiantes obtenidos por query con el primer metodo: ");
-		System.out.println(this.estudianteService.buscarPorNombreFirst("M"));
+		System.out.println("Busqueda de Estudiante por Criteria API Query:");
+		System.out.println(this.estudianteService.buscarPorNombreCriteria("Willan"));
+
+		System.out.println("Busqueda de Estudiante por Criteria API Query con AND y OR:");
+		System.out.println(this.estudianteService.buscarPorNombreCriteriaAndOr("Willan", "Diaz", "M"));
+		System.out.println(this.estudianteService.buscarPorNombreCriteriaAndOr("Ericka", "Guaman", "F"));
+
 	}
 
 }
