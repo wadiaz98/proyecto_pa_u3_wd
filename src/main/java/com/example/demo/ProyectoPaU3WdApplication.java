@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.modelo.Estudiante;
+import com.example.demo.modelo.Hotel;
 import com.example.demo.service.IEstudianteService;
 
 @SpringBootApplication
@@ -21,6 +22,9 @@ public class ProyectoPaU3WdApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+		Hotel hotel1 = new Hotel();
+		hotel1.setDireccion("Miraflores");
+		hotel1.setNombre("Patito");
 		Estudiante estudiante1 = new Estudiante();
 		estudiante1.setApellido("Diaz");
 		estudiante1.setNombre("Willan");
@@ -56,15 +60,10 @@ public class ProyectoPaU3WdApplication implements CommandLineRunner {
 		 * this.estudianteService.insertar(estudiante4);
 		 */
 
-		System.out.println("Busqueda de un EstudianteDTO: ");
-		System.out.println(this.estudianteService.buscarPorNombreTypeQueryDTO("Willan"));
-
-		System.out.println("Busqueda de Estudiante por Criteria API Query:");
-		System.out.println(this.estudianteService.buscarPorNombreCriteria("Willan"));
-
-		System.out.println("Busqueda de Estudiante por Criteria API Query con AND y OR:");
-		System.out.println(this.estudianteService.buscarPorNombreCriteriaAndOr("Willan", "Diaz", "M"));
-		System.out.println(this.estudianteService.buscarPorNombreCriteriaAndOr("Ericka", "Guaman", "F"));
+		System.out.println("Actualizar nombre por apellido: ");
+		System.out.println(this.estudianteService.atualizarporApellido("Diaz", "Alexander"));
+		System.out.println("Eliminar por apellido: ");
+		System.out.println(this.estudianteService.eliminarPorApellido("Cordova"));
 
 	}
 

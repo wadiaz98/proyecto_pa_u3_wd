@@ -235,8 +235,33 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 		// La ejecucion del query lo realizamos con cualquier tipo ya conocido:
 		// TypedQuery
 		TypedQuery<Estudiante> mySQL = this.entityManager.createQuery(myCriteriaQuery);
-		
+
 		return mySQL.getResultList();
+	}
+
+	@Override
+	public int eliminarPorApellido(String apellido) {
+		// TODO Auto-generated method stub
+		// delete from estudiante where estu_apellido = :datoApellido
+		// DELETE FROM Estudiante e where e.apellido = :datoApellido
+		Query query = this.entityManager.createQuery("DELETE FROM Estudiante e where e.apellido = :datoApellido");
+		query.setParameter("datoApellido", apellido);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public int atualizarporApellido(String apellido, String nombre) {
+		// TODO Auto-generated method stub
+		// UPDATE estudiante set estu_nombre = :datoNombre where estu_apellido =
+		// :datoApellido
+		// UPDATE Estudiante e set e.nombre = :datoNombre where e.apellido =
+		// :datoApellido
+		Query query = this.entityManager
+				.createQuery("UPDATE Estudiante e set e.nombre = :datoNombre where e.apellido = :datoApellido");
+		query.setParameter("datoNombre", nombre);
+		query.setParameter("datoApellido", apellido);
+
+		return query.executeUpdate();
 	}
 
 }

@@ -49,4 +49,9 @@ public interface IEstudianteRepo {
 	public Estudiante buscarPorNombreCriteria(String nombre);
 
 	public List<Estudiante> buscarPorNombreCriteriaAndOr(String nombre, String apellido, String bandera);
+
+	// Metodos de ejemplo:
+	public int eliminarPorApellido(String apellido);
+
+	public int atualizarporApellido(String apellido, String nombre);
 }
