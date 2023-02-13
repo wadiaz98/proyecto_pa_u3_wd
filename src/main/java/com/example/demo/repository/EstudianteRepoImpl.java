@@ -264,4 +264,42 @@ public class EstudianteRepoImpl implements IEstudianteRepo {
 		return query.executeUpdate();
 	}
 
+	// Metodos update y delete deber
+
+	@Override
+	public int eliminarPorCedula(String cedula) {
+		// TODO Auto-generated method stub
+		Query query = this.entityManager.createQuery("DELETE FROM Estudiante e where e.cedula = :datoCedula");
+		query.setParameter("datoCedula", cedula);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public int eliminarPorNombre(String nombre) {
+		// TODO Auto-generated method stub
+		Query query = this.entityManager.createNamedQuery("Estudiante.EliminarporNombre");
+		query.setParameter("datoNombre", nombre);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public int actualizarApellidoPorCiudad(String ciudad, String apellido) {
+		// TODO Auto-generated method stub
+		Query query = this.entityManager
+				.createQuery("UPDATE Estudiante e set e.apellido = :datoApellido where e.ciudad = :datoCiudad");
+		query.setParameter("datoCiudad", ciudad);
+		query.setParameter("datoApellido", apellido);
+		return query.executeUpdate();
+	}
+
+	@Override
+	public int actualizarNombreporGenero(String genero, String nombre) {
+		// TODO Auto-generated method stub
+		Query query = this.entityManager
+				.createNativeQuery("UPDATE estudiante set estu_nombre = :datoNombre where estu_genero = :datoGenero");
+		query.setParameter("datoNombre", nombre);
+		query.setParameter("datoGenero", genero);
+		return query.executeUpdate();
+	}
+
 }

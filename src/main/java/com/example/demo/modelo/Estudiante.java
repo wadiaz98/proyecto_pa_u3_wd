@@ -17,7 +17,8 @@ import jakarta.persistence.Table;
 @NamedQueries({
 		@NamedQuery(name = "Estudiante.buscarPorApe", query = "select e from Estudiante e where e.apellido = :datoApellido"),
 		@NamedQuery(name = "Estudiante.buscarPorApe1", query = "select e from Estudiante e where e.apellido = :datoApellido"),
-		@NamedQuery(name = "Estudiante.buscarPorApe2", query = "select e from Estudiante e where e.apellido = :datoApellido") })
+		@NamedQuery(name = "Estudiante.buscarPorApe2", query = "select e from Estudiante e where e.apellido = :datoApellido"),
+		@NamedQuery(name = "Estudiante.EliminarporNombre", query = "DELETE FROM Estudiante e where e.nombre = :datoNombre") })
 
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "Estudiante.buscarPorNombreNative", query = "select * from estudiante where estu_nombre = :datoNombre", resultClass = Estudiante.class),

@@ -135,4 +135,29 @@ public class EstudianteServiceImpl implements IEstudianteService {
 		return this.estudianteRepo.atualizarporApellido(apellido, nombre);
 	}
 
+	// Metodos Update y Delete deber
+	@Override
+	public int eliminarPorCedula(String cedula) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.eliminarPorCedula(cedula);
+	}
+
+	@Override
+	public int eliminarPorNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.eliminarPorNombre(nombre);
+	}
+
+	@Override
+	public int actualizarApellidoPorCiudad(String ciudad, String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.actualizarApellidoPorCiudad(ciudad, apellido);
+	}
+
+	@Override
+	public int actualizarNombreporGenero(String genero, String nombre) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepo.actualizarNombreporGenero(genero, nombre);
+	}
+
 }

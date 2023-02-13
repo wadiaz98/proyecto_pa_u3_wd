@@ -56,4 +56,14 @@ public interface IEstudianteService {
 
 	public int atualizarporApellido(String apellido, String nombre);
 
+	// Metodos deber
+
+	public int eliminarPorCedula(String cedula);
+
+	public int eliminarPorNombre(String nombre);
+
+	public int actualizarApellidoPorCiudad(String ciudad, String apellido);
+
+	public int actualizarNombreporGenero(String genero, String nombre);
+
 }
